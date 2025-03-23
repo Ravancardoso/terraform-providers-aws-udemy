@@ -25,7 +25,7 @@ Monitoramento: CloudWatch, CloudTrail.
 Clone o repositório:
 
 git clone https://github.com/Ravancardoso/terraform-providers-aws-udemy.git
-c
+
 
 Configure a AWS CLI:
 
