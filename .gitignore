@@ -5,5 +5,8 @@
 *.tfstate
 *.out
 *.info
-aws-key*
+*.aws-key*
+*.aws-key.pub
 *.txt
+*.env
+*.modules.json

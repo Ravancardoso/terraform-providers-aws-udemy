@@ -8,7 +8,3 @@ terraform {
     }
   }
 }
-
-module "vpc" {
-  source = "./modules/vpc"  
-}
