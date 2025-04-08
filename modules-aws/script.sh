@@ -1,5 +1,3 @@
-# script de monitoramento
-
 #!/bin/bash
 
 # Atualiza os pacotes
