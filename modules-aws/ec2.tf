@@ -11,8 +11,9 @@ resource "aws_instance" "ec2" {
   vpc_security_group_ids      = [module.vpc.security_group_id]
   associate_public_ip_address = true
 
+
   provisioner "local-exec" {
-    command = "echo ${self.public_ip} >> public_ip.txt"
+    command = "echo ${self.public_ip} >> public_ips.txt"
   }
 
   connection {
@@ -22,17 +23,21 @@ resource "aws_instance" "ec2" {
     host        = self.public_ip
   }
 
-  provisioner "file" {
-    source      = "./teste.txt"
-    destination = "/tmp/exemplo.txt"
+    provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "/tmp/script.sh args",
+    ]
   }
 
-  provisioner "file" {
-    content     = "AMI usada: ${self.ami}"
-    destination = "/tmp/ami.txt"
+
+
+ provisioner "file" {
+    source      = "/etc/script.sh"
+    destination = "/etc/script.sh"
   }
 
   tags = {
-    Name = "vm-terraform"
+    Name = "ec2-terraform"
   }
 }
