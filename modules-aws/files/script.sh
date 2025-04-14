@@ -3,6 +3,34 @@
 # Atualiza os pacotes
 sudo apt update -y && sudo apt upgrade -y
 
+# Instala o Docker
+sudo apt install -y \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+# Adiciona a chave GPG oficial do Docker
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+    sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# Adiciona o repositório do Docker
+echo \
+  "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Atualiza o cache de pacotes e instala o Docker
+sudo apt update -y
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Habilita e inicia o serviço Docker
+sudo systemctl enable docker
+sudo systemctl start docker
+
 # Instala o agente SSM
 sudo snap install amazon-ssm-agent --classic
 sudo systemctl enable amazon-ssm-agent

@@ -23,7 +23,7 @@ resource "aws_instance" "ec2" {
     host        = self.public_ip
   }
 
-    provisioner "remote-exec" {
+  provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/script.sh",
       "/tmp/script.sh args",
@@ -32,7 +32,7 @@ resource "aws_instance" "ec2" {
 
 
 
- provisioner "file" {
+  provisioner "file" {
     source      = "/etc/script.sh"
     destination = "/etc/script.sh"
   }
