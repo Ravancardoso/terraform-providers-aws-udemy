@@ -1,0 +1,10 @@
+aws-key.pub
+aws-key
+*.pem
+.terraform/
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+crash.log
+terraform.tfvars
+.terraform.lock.hcl
