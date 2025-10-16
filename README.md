@@ -1,4 +1,4 @@
-# AWS Infrastructure: [Nome do seu Projeto - Ex: WebApp Demo]
+# AWS Infrastructure: 
 
 ## 🚀 Visão Geral do Projeto
 
