@@ -43,29 +43,26 @@ resource "aws_route_table_association" "rta" {
 
 resource "aws_security_group" "security_group" {
   name        = "security-group-terraform"
-  description = "Permitir acesso na porta 22"
+  description = "ec2 terraform security group"
   vpc_id      = aws_vpc.vpc.id
 
-  ingress {
+ # ingress
+
+ ingress {
     description = "SSH"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["172.28.48.0/20"]
   }
 
+  # Egress
+  
   ingress {
     description = "MySQL"
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
