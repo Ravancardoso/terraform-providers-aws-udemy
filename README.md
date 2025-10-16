@@ -1,45 +1,78 @@
-AWS Infrastructure 
+# AWS Infrastructure: [Nome do seu Projeto - Ex: WebApp Demo]
 
-📌 Introdução
+## 🚀 Visão Geral do Projeto
 
-Este repositório contém a infraestrutura provisionada na AWS para o projeto pessoal. A configuração segue boas práticas de segurança e escalabilidade.
+Este repositório contém o código **Terraform** para provisionar uma infraestrutura completa e moderna na **Amazon Web Services (AWS)**. O objetivo é fornecer uma base **segura, escalável e bem organizada** para a implantação de uma aplicação.
 
-🏗️ Arquitetura
+---
 
-A infraestrutura inclui:
+## 🏗️ Arquitetura e Recursos
 
-Rede: VPC, sub-redes públicas e privadas.
+A infraestrutura é modular e utiliza os seguintes serviços da AWS:
 
-Compute: EC2.
+| Serviço | Descrição |
+| :--- | :--- |
+| **Networking (VPC)** | Rede isolada com sub-redes públicas e privadas. |
+| **Compute (EC2)** | Máquinas virtuais para rodar sua aplicação. |
+| **Database (RDS)** | Banco de dados gerenciado para alta disponibilidade e escalabilidade. |
+| **Storage (S3)** | Armazenamento de objetos para *assets* estáticos, backups e logs. |
+| **Security Groups** | Firewalls virtuais para controlar o tráfego de entrada e saída. |
+| **Observability** | Configurações básicas de CloudWatch e CloudTrail. |
 
-Banco de Dados: RDS.
+⚠️ **Nota sobre IAM:** A gestão de usuários e *roles* do IAM ainda **não** está provisionada neste módulo. O acesso é feito via chaves locais, mas a implementação de **IAM Roles de menor privilégio** é a próxima prioridade.
 
-Armazenamento: S3.
+---
 
-Segurança: IAM, Security Groups.
+## 💻 Pré-requisitos
 
-Monitoramento: CloudWatch, CloudTrail.
+Certifique-se de ter as seguintes ferramentas instaladas e configuradas antes de iniciar:
 
-🚀 Como Deployar
+1.  **Git:** Para clonar o repositório.
+2.  **AWS CLI:** Configurada com credenciais que tenham permissões de administrador (ou suficientes para criar os recursos).
+3.  **Terraform:** Versão `v1.x` ou superior.
 
-Clone o repositório:
+---
 
-git clone https://github.com/Ravancardoso/terraform-providers-aws-udemy.git
+## 🛠️ Como Provisionar a Infraestrutura (Deploy)
+
+Siga os passos abaixo para fazer o *deploy* da infraestrutura na sua conta AWS:
+
+### 1. Clonar o Repositório
+
+```bash
+git clone [https://github.com/Ravancardoso/terraform-providers-aws-udemy.git](https://github.com/Ravancardoso/terraform-providers-aws-udemy.git)
+cd terraform-providers-aws-udemy
 
 
-Configure a AWS CLI:
+
+2. Configurar a AWS
+Certifique-se de que suas credenciais estão configuradas. O Terraform utilizará o perfil padrão da sua AWS CLI.
+
+
 
 aws configure
 
-Execute Terraform.
+3. Inicializar e Aplicar o Terraform
+Execute os comandos padrão do Terraform para inicializar o backend, planejar as mudanças e, em seguida, provisionar os recursos
 
+# 1. Inicializa o ambiente e baixa os providers
 terraform init
+
+# 2. Mostra um plano de execução (o que será criado)
+terraform plan
+
+# 3. Provisiona os recursos na AWS. Digite 'yes' para confirmar
 terraform apply
 
-Boas Práticas
+✅ Boas Práticas e Segurança (Padrões Adotados)
+Este módulo adere a um conjunto de boas práticas essenciais para a produção:
 
-✔️ Use IAM Roles com menor privilégio.
-✔️ Ative logs no CloudWatch para monitoramento.
-✔️ Configure backups automáticos para RDS e S3.
-✔️ Utilize tags para organização e gestão dos recursos.
-✔️ Revise regularmente regras de segurança e permissões.
+Princípio do Menor Privilégio: Os Security Groups são configurados estritamente para o acesso necessário.
+
+Organização: Uso consistente de Tags em todos os recursos para facilitar a gestão e o controle de custos.
+
+Durabilidade: Configuração de backups automáticos para serviços como RDS.
+
+Monitoramento: Logs e métricas ativados (via CloudWatch/CloudTrail) para rastreamento de operações e performance.
+
+Limpeza: O .gitignore está configurado para nunca comitar arquivos sensíveis (.tfstate, chaves, etc.).
