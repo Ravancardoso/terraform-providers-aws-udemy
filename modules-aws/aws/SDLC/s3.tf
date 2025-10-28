@@ -13,8 +13,8 @@ resource "aws_s3_account_public_access_block" "block_account_public_access" {
 
 #bucket state terraform
 
-resource "aws_s3_bucket" "state-terraform" {
-  bucket = var.bucket_name
+resource "aws_s3_bucket" "state-terraform-infrastructure" {
+  bucket = "state-terraform-infrastructure-udemy"
   tags = {
     Name        = var.bucket_name
     Environment = var.environment
@@ -22,8 +22,8 @@ resource "aws_s3_bucket" "state-terraform" {
 }
 
 # versionament
-resource "aws_s3_bucket_versioning" "state-terraform_versioning" {
-  bucket = aws_s3_bucket.state-terraform.id
+resource "aws_s3_bucket_versioning" "state-terraform-infrastructure_versioning" {
+  bucket = aws_s3_bucket.state-terraform-infrastructure.id
 
   versioning_configuration {
     status = "Suspended"

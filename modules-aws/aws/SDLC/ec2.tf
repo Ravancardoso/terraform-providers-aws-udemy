@@ -3,13 +3,15 @@ resource "aws_key_pair" "key" {
   public_key = file("./aws-key.pub")
 }
 
+
+# EC2  
 resource "aws_instance" "ec2" {
   ami                         = "ami-0360c520857e3138f"
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.key.key_name
-  subnet_id                   = aws_subnet.subnet.id
+  subnet_id                   = aws_subnet.private_a.id
   vpc_security_group_ids      = [aws_security_group.security_group.id]
-  associate_public_ip_address = true
+  associate_public_ip_address = false
 
 
   provisioner "local-exec" {
@@ -39,5 +41,6 @@ resource "aws_instance" "ec2" {
 
   tags = {
     Name = "ec2-terraform"
+    environment = "development"
   }
 }
