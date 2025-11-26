@@ -19,7 +19,7 @@ resource "aws_db_instance" "rds" {
   skip_final_snapshot    = true
 
   tags = {
-    Name = "rds-terraform-lab-aws"
+    Name        = "rds-terraform-lab-aws"
     environment = "development"
   }
 }

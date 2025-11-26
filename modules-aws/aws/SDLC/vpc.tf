@@ -1,13 +1,13 @@
 
 # VPC
 
-resource "aws_vpc" "vpc-lab-aws" { 
-  cidr_block            = "10.0.0.0/16"
-  enable_dns_support    = true
-  enable_dns_hostnames  = true
+resource "aws_vpc" "vpc-lab-aws" {
+  cidr_block           = "10.0.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
 
   tags = {
-    Name = "vpc-lab-aws" 
+    Name = "vpc-lab-aws"
   }
 }
 
@@ -50,7 +50,7 @@ resource "aws_subnet" "public_b" {
 
 # Private Subnets
 resource "aws_subnet" "private_a" {
-  vpc_id            = aws_vpc.vpc-lab-aws.id 
+  vpc_id            = aws_vpc.vpc-lab-aws.id
   cidr_block        = "10.0.3.0/24"
   availability_zone = "us-east-1a"
 
@@ -60,7 +60,7 @@ resource "aws_subnet" "private_a" {
 }
 
 resource "aws_subnet" "private_b" {
-  vpc_id            = aws_vpc.vpc-lab-aws.id 
+  vpc_id            = aws_vpc.vpc-lab-aws.id
   cidr_block        = "10.0.4.0/24"
   availability_zone = "us-east-1b"
 
@@ -73,7 +73,7 @@ resource "aws_subnet" "private_b" {
 # Route Tables
 
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.vpc-lab-aws.id 
+  vpc_id = aws_vpc.vpc-lab-aws.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -86,14 +86,14 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table" "private_a" {
-  vpc_id = aws_vpc.vpc-lab-aws.id 
+  vpc_id = aws_vpc.vpc-lab-aws.id
   tags = {
     Name = "private-rt-a-terraform-lab-aws"
   }
 }
 
 resource "aws_route_table" "private_b" {
-  vpc_id = aws_vpc.vpc-lab-aws.id 
+  vpc_id = aws_vpc.vpc-lab-aws.id
   tags = {
     Name = "private-rt-b-terraform-lab-aws"
   }
@@ -126,7 +126,7 @@ resource "aws_route_table_association" "private_b" {
 # NAT Gateways
 
 resource "aws_eip" "nat_a" {
-    tags = { Name = "nat-eip-a-terraform-lab" }
+  tags = { Name = "nat-eip-a-terraform-lab" }
 }
 
 resource "aws_eip" "nat_b" {
@@ -176,25 +176,25 @@ resource "aws_route" "private_b_route" {
 
 resource "aws_security_group" "security_group_ec2" {
   name        = "security-group-ec2-lab-aws"
-  description = "Permitir todo o trafego de saida via NAT Gateway"
-  vpc_id      = aws_vpc.vpc-lab-aws.id 
+  description = "Allow all outbound traffic (Via NAT Gateway)"
+  vpc_id      = aws_vpc.vpc-lab-aws.id
 
- 
+
   # Ingress
- 
-  ingress { 
+
+  ingress {
     description = "SSH"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["172.28.48.0/20"] 
+    cidr_blocks = ["172.28.48.0/20"]
   }
 
-  
+
   # Egress
-  
-  egress { 
-    description = "Permitir todo o tráfego de saída (Via NAT Gateway)"
+
+  egress {
+    description = "Allow all outbound traffic (Via NAT Gateway)"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -216,20 +216,20 @@ resource "aws_security_group" "security_group_rds" {
   description = "Security Group for RDS"
   vpc_id      = aws_vpc.vpc-lab-aws.id
 
-  
-  # Ingress
-  
+
+  # egress
+
 
   ingress {
-    description     = "Permitir conexão MySQL da EC2"
+    description     = "Allow MySQL connection from EC2"
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.security_group_ec2.id] 
+    security_groups = [aws_security_group.security_group_ec2.id]
   }
 
 
-   tags = {
+  tags = {
     Name        = "security-group-rds-lab-aws"
     environment = "development"
   }

@@ -76,3 +76,29 @@ Durabilidade: Configuração de backups automáticos para serviços como RDS.
 Monitoramento: Logs e métricas ativados (via CloudWatch/CloudTrail) para rastreamento de operações e performance.
 
 Limpeza: O .gitignore está configurado para nunca comitar arquivos sensíveis (.tfstate, chaves, etc.).
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+No providers.
+
+## Modules
+
+No modules.
+
+## Resources
+
+No resources.
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

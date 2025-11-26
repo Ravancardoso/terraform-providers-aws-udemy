@@ -4,7 +4,7 @@
 # 1. IAM Role EC2 for SSM
 resource "aws_iam_role" "ec2_ssm_role" {
   name = "ec2-ssm-role-lab-aws"
-  
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
@@ -17,7 +17,7 @@ resource "aws_iam_role" "ec2_ssm_role" {
   })
 
   tags = {
-    Name = "EC2RoleForSSM"
+    Name        = "EC2RoleForSSM"
     environment = "development"
   }
 }
@@ -31,7 +31,7 @@ resource "aws_iam_role_policy_attachment" "ssm_policy_attach" {
 
 # 3. Instance Profile
 
-resource "aws_iam_instance_profile" "ssm_profile" {
+resource "aws_iam_instance_profile" "ec2_ssm_profile" {
   name = "ssm-instance-profile-lab-aws"
   role = aws_iam_role.ec2_ssm_role.name
 }
