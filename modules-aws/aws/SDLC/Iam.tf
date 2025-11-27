@@ -16,10 +16,13 @@ resource "aws_iam_role" "ec2_ssm_role" {
     }]
   })
 
-  tags = {
-    Name        = "EC2RoleForSSM"
-    environment = "development"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-iam-dev"
+    }
+  )
 }
 
 # 2. Anexar Policy SSM

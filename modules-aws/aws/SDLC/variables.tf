@@ -3,9 +3,3 @@ variable "state-terraform" {
   type        = string
   default     = "state-terraform"
 }
-
-variable "environment" {
-  description = "environment"
-  type        = string
-  default     = "dev"
-}

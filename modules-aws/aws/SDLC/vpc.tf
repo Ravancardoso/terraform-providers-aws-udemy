@@ -6,9 +6,13 @@ resource "aws_vpc" "vpc-lab-aws" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
-  tags = {
-    Name = "vpc-lab-aws"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-vpc-dev"
+    }
+  )
 }
 
 
@@ -17,9 +21,13 @@ resource "aws_vpc" "vpc-lab-aws" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc-lab-aws.id
 
-  tags = {
-    Name = "igw-terraform-lab-aws"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-Nat-Gateway-dev"
+    }
+  )
 }
 
 
@@ -32,9 +40,13 @@ resource "aws_subnet" "public_a" {
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
 
-  tags = {
-    Name = "public-subnet-a-terraform-lab-aws"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-subnet-a-dev"
+    }
+  )
 }
 
 resource "aws_subnet" "public_b" {
@@ -43,9 +55,13 @@ resource "aws_subnet" "public_b" {
   availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
 
-  tags = {
-    Name = "public-subnet-b-terraform-lab-aws"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-subnet-b-dev"
+    }
+  )
 }
 
 # Private Subnets
@@ -54,9 +70,13 @@ resource "aws_subnet" "private_a" {
   cidr_block        = "10.0.3.0/24"
   availability_zone = "us-east-1a"
 
-  tags = {
-    Name = "private-subnet-a-terraform-lab-aws"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-Nat-private-a-dev"
+    }
+  )
 }
 
 resource "aws_subnet" "private_b" {
@@ -64,9 +84,13 @@ resource "aws_subnet" "private_b" {
   cidr_block        = "10.0.4.0/24"
   availability_zone = "us-east-1b"
 
-  tags = {
-    Name = "private-subnet-b-terraform-lab-aws"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-subnet-private-b-dev"
+    }
+  )
 }
 
 
@@ -80,23 +104,35 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.igw.id
   }
 
-  tags = {
-    Name = "public-rt-terraform-lab-aws"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-route-table-dev"
+    }
+  )
 }
 
 resource "aws_route_table" "private_a" {
   vpc_id = aws_vpc.vpc-lab-aws.id
-  tags = {
-    Name = "private-rt-a-terraform-lab-aws"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-private-a-dev"
+    }
+  )
 }
 
 resource "aws_route_table" "private_b" {
   vpc_id = aws_vpc.vpc-lab-aws.id
-  tags = {
-    Name = "private-rt-b-terraform-lab-aws"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-private-b-dev"
+    }
+  )
 }
 
 
@@ -126,11 +162,23 @@ resource "aws_route_table_association" "private_b" {
 # NAT Gateways
 
 resource "aws_eip" "nat_a" {
-  tags = { Name = "nat-eip-a-terraform-lab" }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-Nat-a-dev"
+    }
+  )
 }
 
 resource "aws_eip" "nat_b" {
-  tags = { Name = "nat-eip-b-terraform-lab" }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-Nat-b-dev"
+    }
+  )
 }
 
 resource "aws_nat_gateway" "nat_a" {
@@ -201,10 +249,13 @@ resource "aws_security_group" "security_group_ec2" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name        = "security-group-ec2-lab-aws"
-    environment = "development"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-SG-ec2-dev"
+    }
+  )
 }
 
 
@@ -229,8 +280,11 @@ resource "aws_security_group" "security_group_rds" {
   }
 
 
-  tags = {
-    Name        = "security-group-rds-lab-aws"
-    environment = "development"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-SG-RDS-dev"
+    }
+  )
 }

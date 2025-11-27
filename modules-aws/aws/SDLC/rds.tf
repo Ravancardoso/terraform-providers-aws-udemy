@@ -2,9 +2,13 @@ resource "aws_db_subnet_group" "db_subnet_group" {
   name       = "db-subnet-group-terraform"
   subnet_ids = [aws_subnet.private_a.id, aws_subnet.private_b.id]
 
-  tags = {
-    Name = "db-subnet-group-terraform"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-rds-dev"
+    }
+  )
 }
 
 resource "aws_db_instance" "rds" {
@@ -18,8 +22,11 @@ resource "aws_db_instance" "rds" {
   db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.name
   skip_final_snapshot    = true
 
-  tags = {
-    Name        = "rds-terraform-lab-aws"
-    environment = "development"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-rds-dev"
+    }
+  )
 }

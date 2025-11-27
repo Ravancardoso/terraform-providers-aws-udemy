@@ -1,7 +1,3 @@
-resource "aws_sns_topic" "alarm_topic" {
-  name = "terraform-cpu-alarm-topic"
-}
-
 resource "aws_cloudwatch_metric_alarm" "cpu_utilization_high" {
   alarm_name          = "High_CPU_Utilization_EC2"
   comparison_operator = "GreaterThanOrEqualToThreshold"
@@ -13,14 +9,19 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_high" {
   threshold           = 80
   alarm_description   = "Alarme disparado quando o uso da CPU excede 80% em 2 períodos"
 
-  # Adicione as dimensões para especificar qual recurso monitorar
   dimensions = {
     InstanceId = "i-0123456789abcdef0"
   }
 
-  # Ações a serem executadas quando o estado mudar para ALARM (alarme disparado)
   alarm_actions = [aws_sns_topic.alarm_topic.arn]
+  ok_actions    = [aws_sns_topic.alarm_topic.arn]
 
-  # Ações a serem executadas quando o estado voltar para OK
-  ok_actions = [aws_sns_topic.alarm_topic.arn]
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name      = "cpu-alarm-high"
+      AlarmType = "EC2-CPU"
+    }
+  )
 }

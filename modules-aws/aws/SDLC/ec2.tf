@@ -40,8 +40,11 @@ resource "aws_instance" "ec2" {
     destination = "/etc/script.sh"
   }
 
-  tags = {
-    Name        = "ec2-terraform-lab-aws"
-    environment = "development"
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-ec2-dev"
+    }
+  )
 }

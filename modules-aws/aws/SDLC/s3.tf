@@ -15,10 +15,13 @@ resource "aws_s3_account_public_access_block" "block_account_public_access" {
 
 resource "aws_s3_bucket" "state-terraform-infrastructure" {
   bucket = "state-terraform-infrastructure-udemy"
-  tags = {
-    Name        = var.bucket_name
-    Environment = var.environment
-  }
+  tags = merge(
+    local.default_tags,
+    local.environment_tags,
+    {
+      Name = "lab-s3-dev"
+    }
+  )
 }
 
 # versionament

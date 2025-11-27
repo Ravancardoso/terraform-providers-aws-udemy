@@ -59,7 +59,6 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | The name of the S3 bucket | `string` | n/a | yes |
-| <a name="input_environment"></a> [environment](#input\_environment) | environment | `string` | `"dev"` | no |
 | <a name="input_state-terraform"></a> [state-terraform](#input\_state-terraform) | The name of the S3 bucket | `string` | `"state-terraform"` | no |
 
 ## Outputs
