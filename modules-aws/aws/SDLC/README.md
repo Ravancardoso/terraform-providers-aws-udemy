@@ -20,6 +20,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_budgets_budget.monthly_budget](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/budgets_budget) | resource |
 | [aws_cloudwatch_metric_alarm.cpu_utilization_high](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/cloudwatch_metric_alarm) | resource |
 | [aws_db_instance.rds](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/db_instance) | resource |
 | [aws_db_subnet_group.db_subnet_group](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/db_subnet_group) | resource |
@@ -43,11 +44,12 @@ No modules.
 | [aws_route_table_association.public_a](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/route_table_association) | resource |
 | [aws_route_table_association.public_b](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/route_table_association) | resource |
 | [aws_s3_account_public_access_block.block_account_public_access](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/s3_account_public_access_block) | resource |
-| [aws_s3_bucket.state-terraform-infrastructure](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket.state-terraform-infrastructure-lab-ravan](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_versioning.state-terraform-infrastructure_versioning](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/s3_bucket_versioning) | resource |
 | [aws_security_group.security_group_ec2](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/security_group) | resource |
 | [aws_security_group.security_group_rds](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/security_group) | resource |
 | [aws_sns_topic.alarm_topic](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/sns_topic) | resource |
+| [aws_sns_topic.billing_alerts](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/sns_topic) | resource |
 | [aws_subnet.private_a](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/subnet) | resource |
 | [aws_subnet.private_b](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/subnet) | resource |
 | [aws_subnet.public_a](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/subnet) | resource |
