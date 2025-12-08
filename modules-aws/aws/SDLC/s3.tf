@@ -26,7 +26,7 @@ resource "aws_s3_bucket" "state-terraform-infrastructure-lab-ravan" {
 
 # versionament
 resource "aws_s3_bucket_versioning" "state-terraform-infrastructure_versioning" {
-  bucket = aws_s3_bucket.state-terraform-infrastructure-lab-ravan
+  bucket = aws_s3_bucket.state-terraform-infrastructure-lab-ravan.bucket
 
   versioning_configuration {
     status = "Suspended"
