@@ -24,6 +24,7 @@ No modules.
 | [aws_cloudwatch_metric_alarm.cpu_utilization_high](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/cloudwatch_metric_alarm) | resource |
 | [aws_db_instance.rds](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/db_instance) | resource |
 | [aws_db_subnet_group.db_subnet_group](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/db_subnet_group) | resource |
+| [aws_dynamodb_table.tf_locks](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/dynamodb_table) | resource |
 | [aws_eip.nat_a](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/eip) | resource |
 | [aws_eip.nat_b](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/eip) | resource |
 | [aws_iam_instance_profile.ec2_ssm_profile](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/iam_instance_profile) | resource |
@@ -43,9 +44,6 @@ No modules.
 | [aws_route_table_association.private_b](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/route_table_association) | resource |
 | [aws_route_table_association.public_a](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/route_table_association) | resource |
 | [aws_route_table_association.public_b](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/route_table_association) | resource |
-| [aws_s3_account_public_access_block.block_account_public_access](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/s3_account_public_access_block) | resource |
-| [aws_s3_bucket.state-terraform-infrastructure-lab-ravan](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/s3_bucket) | resource |
-| [aws_s3_bucket_versioning.state-terraform-infrastructure_versioning](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/s3_bucket_versioning) | resource |
 | [aws_security_group.security_group_ec2](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/security_group) | resource |
 | [aws_security_group.security_group_rds](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/security_group) | resource |
 | [aws_sns_topic.alarm_topic](https://registry.terraform.io/providers/hashicorp/aws/4.60.0/docs/resources/sns_topic) | resource |
@@ -60,13 +58,17 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | The name of the S3 bucket | `string` | n/a | yes |
-| <a name="input_state-terraform"></a> [state-terraform](#input\_state-terraform) | The name of the S3 bucket | `string` | `"state-terraform"` | no |
+| <a name="input_state-terraform-infrastructure-lab-ravan"></a> [state-terraform-infrastructure-lab-ravan](#input\_state-terraform-infrastructure-lab-ravan) | The name of the S3 bucket | `string` | `"state-terraform-infrastructure-lab-ravan"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_bucket_arn"></a> [bucket\_arn](#output\_bucket\_arn) | ARN do bucket criado na AWS |
-| <a name="output_bucket_id"></a> [bucket\_id](#output\_bucket\_id) | Bucket criado na AWS |
+| <a name="output_ec2_instance_id"></a> [ec2\_instance\_id](#output\_ec2\_instance\_id) | EC2 instance ID |
+| <a name="output_ec2_public_ip"></a> [ec2\_public\_ip](#output\_ec2\_public\_ip) | EC2 public IP |
+| <a name="output_private_subnet_ids"></a> [private\_subnet\_ids](#output\_private\_subnet\_ids) | Private subnet IDs |
+| <a name="output_public_subnet_ids"></a> [public\_subnet\_ids](#output\_public\_subnet\_ids) | Public subnet IDs |
+| <a name="output_rds_endpoint"></a> [rds\_endpoint](#output\_rds\_endpoint) | RDS endpoint |
+| <a name="output_sns_topic_arn"></a> [sns\_topic\_arn](#output\_sns\_topic\_arn) | SNS Topic ARN |
+| <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | VPC ID |
 <!-- END_TF_DOCS -->
