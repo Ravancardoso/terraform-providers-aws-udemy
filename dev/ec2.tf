@@ -1,6 +1,6 @@
 resource "aws_key_pair" "key" {
   key_name   = "aws-key"
-  public_key = file("./aws-key.pub")
+  public_key = file("${path.module}/files/aws-key.pub")
 }
 
 
@@ -22,13 +22,13 @@ resource "aws_instance" "ec2" {
   connection {
     type        = "ssh"
     user        = "ubuntu"
-    private_key = file("./aws-key")
+    private_key = file("${path.module}/files/aws-key.pub")
     host        = self.public_ip
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/script.sh",
+      "chmod +x /tmp/ec2_setup.sh",
       "/tmp/script.sh args",
     ]
   }
@@ -36,8 +36,8 @@ resource "aws_instance" "ec2" {
 
 
   provisioner "file" {
-    source      = "/etc/script.sh"
-    destination = "/etc/script.sh"
+    source      = "/etc/ec2_setup.sh"
+    destination = "/etc/ec2_setup.sh"
   }
 
   tags = merge(

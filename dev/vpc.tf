@@ -288,3 +288,27 @@ resource "aws_security_group" "security_group_rds" {
     }
   )
 }
+
+#Security Group for Load Balancer
+resource "aws_security_group" "alb_sg" {
+  name        = "lab-alb-sg"
+  description = "Allow HTTP inbound traffic"
+  vpc_id      = aws_vpc.vpc-lab-aws.id
+
+  ingress {
+    description = "HTTP from world"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = merge(local.default_tags, { Name = "lab-alb-sg-dev" })
+}
